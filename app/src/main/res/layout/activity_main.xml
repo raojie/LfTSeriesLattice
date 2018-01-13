@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.landfone.lattice.test.InitActivity">
+
+    <LinearLayout
+        style="@style/wrap_layout"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/showContentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CCCCCC"
+            android:inputType="textMultiLine"
+            android:maxLines="9"
+            android:text=""
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/showContentTextView2"
+            android:layout_width="460dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#CCCCCC"
+            android:inputType="textMultiLine"
+            android:maxLines="9"
+            android:text=""
+            android:textSize="25sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/wrap_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/inputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="请输入相关内容,按发送/取消"
+            android:text="欢迎使用演示程序"
+            android:textSize="25sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="选择串口:" />
+
+            <Spinner
+                android:id="@+id/comPort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/com1_port" />
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="POS服务器IP:" />
+
+            <EditText
+                android:id="@+id/posIPEditText"
+                android:layout_width="220dp"
+                android:layout_height="60dp"
+                android:text="122.226.116.137"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="POS服务器端口:" />
+
+            <EditText
+                android:id="@+id/posPortEditText"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:text="10003"
+                android:textSize="25sp" />
+
+            <Switch
+                android:id="@+id/hardSwth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="硬加密:"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="选择串口:" />
+
+            <Spinner
+                android:id="@+id/com2Port"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/com2_port" />
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="POS服务器IP:" />
+
+            <EditText
+                android:id="@+id/posIPEditText2"
+                android:layout_width="220dp"
+                android:layout_height="60dp"
+                android:text="122.226.116.137"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="POS服务器端口:" />
+
+            <EditText
+                android:id="@+id/posPortEditText2"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:text="10004"
+                android:textSize="25sp" />
+
+            <Switch
+                android:id="@+id/hardSwth2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="vertical"
+        android:scrollbars="vertical">
+
+        <RelativeLayout
+            style="@style/wrap_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/pos1SignBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:text="POS1签到"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/pos2SignBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/pos1SignBtn"
+                android:text="POS2签到"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/pos1PayBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/pos2SignBtn"
+                android:layout_marginLeft="10dp"
+                android:text="POS1消费"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/pos2PayBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/pos1PayBtn"
+                android:layout_marginLeft="10dp"
+                android:text="POS2消费"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/posCancelPayBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/pos2PayBtn"
+                android:layout_marginLeft="10dp"
+                android:text="取消POS消费"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/posQueryBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/posCancelPayBtn"
+                android:layout_marginLeft="10dp"
+                android:text="POS查询交易"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/posRefundBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/posQueryBtn"
+                android:layout_marginLeft="10dp"
+                android:text="POS退款"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/posSettleBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/posRefundBtn"
+                android:layout_marginLeft="10dp"
+                android:text="POS结算"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/firstShowBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:text="点阵屏上半部分显示"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/secondShowBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/firstShowBtn"
+                android:layout_marginRight="10dp"
+                android:text="第二行显示"
+                android:textSize="25sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/thirdShowBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/secondShowBtn"
+                android:layout_marginRight="10dp"
+                android:text="第三行显示"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/fourthShowBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/thirdShowBtn"
+                android:layout_marginRight="10dp"
+                android:text="第四行显示"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/openSrcBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/fourthShowBtn"
+                android:layout_marginRight="10dp"
+                android:text="手动开屏"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/closeSrcBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/openSrcBtn"
+                android:layout_marginRight="10dp"
+                android:text="手动关屏"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/showcontentBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/closeSrcBtn"
+                android:layout_marginRight="10dp"
+                android:text="显示文字"
+                android:textSize="25sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/clearSrcBtn"
+                android:layout_width="460dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/closeSrcBtn"
+                android:layout_marginRight="10dp"
+                android:text="清屏"
+                android:textSize="25sp" />
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

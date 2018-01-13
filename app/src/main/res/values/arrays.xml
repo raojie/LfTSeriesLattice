@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="com1_port">
+        <!--<item>/dev/ttyS3</item>-->
+        <item>/dev/ttyS2</item>
+        <!--<item>/dev/ttyS1</item>-->
+        <!--<item>/dev/ttyS0</item>-->
+    </string-array>
+    <string-array name="com2_port">
+        <!--<item>/dev/ttyS3</item>-->
+        <!--<item>/dev/ttyS2</item>-->
+        <item>/dev/ttyS1</item>
+        <!--<item>/dev/ttyS0</item>-->
+    </string-array>
+</resources>
