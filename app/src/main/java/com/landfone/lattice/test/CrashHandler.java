@@ -62,7 +62,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("crash", true);
             PendingIntent restartIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 3000, restartIntent); // 1秒钟后重启应用
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 5000, restartIntent); // 5秒钟后重启应用
             ex.printStackTrace();
             try {
                 Thread.sleep(1000);

@@ -2281,7 +2281,7 @@ public class LfPosApiMispos1 extends LfPosSerialCtrl {
                                 } else if (mREPLY.code.equals("Z1") || mREPLY.code.equals("XY")
                                         || mREPLY.code.equals("X8") || mREPLY.code.equals("X7")
                                         || mREPLY.code.equals("A0") || mREPLY.code.equals("X6")
-                                        || mREPLY.code.equals("XX")) {
+                                        || mREPLY.code.equals("XX") || mREPLY.code.equals("Z0")) {
                                     Display dis = new Display();
                                     dis.setType(DisplayType._6.getType());
                                     dis.setMsg(mREPLY.code_info + "\n");
@@ -2348,6 +2348,14 @@ public class LfPosApiMispos1 extends LfPosSerialCtrl {
                                 _07_Common disc = new _07_Common();
                                 i = disc.Unpack(ptOutPara);
                                 Display dis = disc.getDis();
+                                if (dis.getMsg().equals("欢迎使用银联云闪付")) {
+                                    Logz.d(TAG, "dis.getType:" + dis.getType() + ", dis.getMsg:" + dis.getMsg());
+                                    _ReplyXXK(MISPOS.PROTOCOL_PATH_INFO_RECV, MISPOS.PACK_ACK, ErrCode._00);
+                                    setUserTradeType(TradeType.NONE);
+                                    doDisplayCallback(dis);
+                                    Sleep(2000);
+                                    throw new LfException(Errs.OTHER_ERR, ErrCode._Z1.getDesc());
+                                }
                                 doDisplayCallback(dis);
                                 // TODO:遇到输入密码或者确认卡号时，超时时间需要重新设置！！！！！！！！！！！！显示内容回调
                                 if (disc.getTradeType() == TradeType.GETKEY_KEYREPORT) {

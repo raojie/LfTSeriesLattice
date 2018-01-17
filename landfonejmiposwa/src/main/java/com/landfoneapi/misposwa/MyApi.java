@@ -600,6 +600,8 @@ public class MyApi extends LfApi {
                                 obj = (_04_PurchaseReply) mREPLY;
                             } else if (zn_op_type == E_OP_TYPE.OP_POS_SIGNIN) {
                                 Logz.i(TAG,"raoj------签到6---pos_base");
+//                                t.setTimeout((byte) 120);
+                                t.setTimeout((byte) 60);
                                 t.setTradeType(TradeType.SIGNIN);
                                 mREPLY = pmLfPosApiMispos._03_Signin(t);
                                 obj = mREPLY;
@@ -1081,6 +1083,8 @@ public class MyApi extends LfApi {
                             } else {
                                 dpl.setType(mREPLY.code);
                                 dpl.setMsg(mREPLY.code_info);
+//                                Logz.i(TAG, "send111 " + zn_op_type.getDesc() + " ,dpl:" + dpl.getMsg()
+//                                        + " ,zn_op_type:" + zn_op_type);
                             }
                         } catch (LfException e) {
                             Logz.i(TAG, e.getMessage());
@@ -1158,81 +1162,6 @@ public class MyApi extends LfApi {
         return pos_base(E_OP_TYPE.OP_POS_SIGNIN);
     }
 
-    /**
-     * 签到，只有签到成功后才可以进行交易
-     */
-//    public E_REQ_RETURN pos_signin() {
-//        if (state_op == E_REQ_RETURN.REQ_BUSY) {
-//            if (state_op == E_REQ_RETURN.REQ_BUSY || pmLfPosApiMispos._IsBusy()) {
-//                return E_REQ_RETURN.REQ_BUSY;
-//            }
-//            if (CheckApiState(E_OP_TYPE.OP_POS_SIGNIN, E_API_STATE.NOT_SIGNIN)) {//无视未签到状态
-//                Logz.i(TAG, "return deny");
-//                return E_REQ_RETURN.REQ_DENY;
-//            }
-//            synchronized (lockApi) {
-//                state_op = E_REQ_RETURN.REQ_BUSY;
-//                //异步调用
-//                Thread mMyApiTask = new Thread(new Runnable() {
-//                    public void run() {
-//                        _03_Common t = new _03_Common();
-//                        REPLY mREPLY = new REPLY();
-//                        String info = "";
-//                        int reply = 0;
-//                        E_ERR_CODE err_code = E_ERR_CODE.ERR_UNKNOW;
-//                        Message msg = new Message();
-//                        msg.arg1 = 0;//OP_SIGNIN;
-//                        msg.obj = null;
-//                        lastOP = E_OP_TYPE.OP_POS_SIGNIN;
-//                        try {
-//                            //设置请求参数
-//                            t.setTradeType(TradeType.SIGNIN);//交易类型
-////                        t.setSignOperator(operator);
-//                            mREPLY = pmLfPosApiMispos._03_Signin(t);//发起请求
-//                            //mREPLY.code_info = "签到成功";
-//                            //设置正常返回结果
-//                            msg.arg2 = 0;//mREPLY.reply;//返回标志(MISPOS.PACK_NAK/MISPOS.PACK_ACK)
-//                            err_code = CheckNAK(mREPLY);
-//
-//                            reply = mREPLY.reply == MISPOS.PACK_ACK ? 0 : 1;
-//                            info = mREPLY.code + ", " + mREPLY.code_info;
-//                            dpl.setType(mREPLY.code);
-//                            dpl.setMsg(mREPLY.code_info);
-//                            if (mREPLY.reply == MISPOS.PACK_ACK) {
-//                                state_api = E_API_STATE.SIGNIN_OK;
-//                            }
-//                        } catch (LfException e) {
-//                            mREPLY.code = "ER";
-//                            mREPLY.code_info = e.getMessage();
-//                            dpl.setType(mREPLY.code);
-//                            dpl.setMsg(mREPLY.code_info);
-//                            Log.v("POS", e.getMessage());
-//                            //异常返回
-//                            msg.arg2 = 0;//MISPOS.PACK_NAK;//
-//                            msg.obj = 0;//e.getMessage();//LfException
-//                            info = e.getMessage();
-//                            reply = 1;
-//                            err_code = CheckMisPosLfException(e);
-//                        } finally {
-//                            state_op = E_REQ_RETURN.REQ_OK;
-//                            msg.obj = (new CallbackMsg(err_code, E_OP_TYPE.OP_POS_SIGNIN, reply, state_api, info, mREPLY, dpl));
-//                            if (isUseSynch()) {//同步返回
-//                                state_op.setObj(msg.obj);
-//                            } else {//异步返回
-//                                sendMessage(msg);
-//                            }
-//                        }
-//                    }
-//                });
-//                if (isUseSynch()) {
-//                    mMyApiTask.run();
-//                    return state_op;
-//                }
-//                mMyApiTask.start();
-//            }
-//        }
-//        return E_REQ_RETURN.REQ_OK;
-//    }
     public E_REQ_RETURN pos_signin() {
         return pos_signin("");
     }

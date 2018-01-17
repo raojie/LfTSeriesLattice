@@ -600,6 +600,8 @@ public class MyApi1 extends LfApi1 {
                                 obj = (_04_PurchaseReply) mREPLY;
                             } else if (zn_op_type == E_OP_TYPE.OP_POS_SIGNIN) {
                                 Logz.i(TAG,"raoj------签到6---pos_base");
+//                                t.setTimeout((byte) 120);
+                                t.setTimeout((byte) 60);
                                 t.setTradeType(TradeType.SIGNIN);
                                 mREPLY = pmLfPosApiMispos1._03_Signin(t);
                                 obj = mREPLY;

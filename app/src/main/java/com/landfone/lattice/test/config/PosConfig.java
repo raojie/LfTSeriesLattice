@@ -23,6 +23,8 @@ public class PosConfig {
     private static class PosConfigHolder {
         private static final PosConfig INSTANCE = new PosConfig();
     }
+
+    private boolean mightPosNetError = false;
     private boolean mightPos1Signing = false;//pos1是否正在签到
     private boolean mightPos2Signing = false;//pos2是否正在签到
     private boolean mightPos1Signed = false;//pos1是否签到成功
@@ -48,36 +50,12 @@ public class PosConfig {
     private boolean mightPos1HandOK = false;//pos1握手成功
     private boolean mightPos2HandOK = false;//pos2握手成功
 
-    public boolean isMightPos1HandOK() {
-        return mightPos1HandOK;
+    public boolean isMightPosNetError() {
+        return mightPosNetError;
     }
 
-    public void setMightPos1HandOK(boolean mightPos1HandOK) {
-        this.mightPos1HandOK = mightPos1HandOK;
-    }
-
-    public boolean isMightPos2HandOK() {
-        return mightPos2HandOK;
-    }
-
-    public void setMightPos2HandOK(boolean mightPos2HandOK) {
-        this.mightPos2HandOK = mightPos2HandOK;
-    }
-
-    public boolean isMightPos1ReturnPayResult() {
-        return mightPos1ReturnPayResult;
-    }
-
-    public void setMightPos1ReturnPayResult(boolean mightPos1ReturnPayResult) {
-        this.mightPos1ReturnPayResult = mightPos1ReturnPayResult;
-    }
-
-    public boolean isMightPos2ReturnPayResult() {
-        return mightPos2ReturnPayResult;
-    }
-
-    public void setMightPos2ReturnPayResult(boolean mightPos2ReturnPayResult) {
-        this.mightPos2ReturnPayResult = mightPos2ReturnPayResult;
+    public void setMightPosNetError(boolean mightPosNetError) {
+        this.mightPosNetError = mightPosNetError;
     }
 
     public boolean isMightCheckPos1Paying() {

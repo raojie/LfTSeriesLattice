@@ -17,6 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File("D:\\apk\\", "Lf550Demo-V${defaultConfig.versionCode}.apk");
+//     output.outputFile = new File(output.outputFile.parent, "landfoneAoMa3" + "-V" + defaultConfig.versionCode + ".apk" );
+        }
+    }
 }
 
 dependencies {
