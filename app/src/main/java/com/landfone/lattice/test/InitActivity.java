@@ -50,15 +50,12 @@ public class InitActivity extends AppCompatActivity {
     private MyApi pos1MyApi = new MyApi();
     private MyApi1 pos2MyApi = new MyApi1();
 
-    private long current_time = -1;
-    private long lastPosPlaySound = -1;
     private MediaPlayer mediaPlayer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        current_time = System.currentTimeMillis();
         CrashHandler.getInstance().init(getApplicationContext());
         lfLattice = new LfLattice();
         lfLattice.InitLfLattice("/dev/ttyS3", "115200");
@@ -96,23 +93,6 @@ public class InitActivity extends AppCompatActivity {
             mediaPlayer.start();
         }
     };
-
-//        try {
-//            mediaPlayer = MediaPlayer.create(context, id);
-//
-//            mediaPlayer.prepare();
-//            if (mediaPlayer.isPlaying()) {
-//                mediaPlayer.stop();
-//                mediaPlayer.release();
-//                mediaPlayer = MediaPlayer.create(this, id);
-//            }
-//            mediaPlayer.start();
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     private Handler mHandler = new Handler() {
         @Override
@@ -346,13 +326,6 @@ public class InitActivity extends AppCompatActivity {
     }
 
     private long background_current_time = -1;
-
-    public void start() {
-        SleepUtils._sleep(60000);
-        Log.d(TAG, "start...");
-        backgroundThread.start();
-        checkCurrentPosStatusThread.start();
-    }
 
     //检测当前pos的流程处于什么状态,并进行相应操作
     private Thread checkCurrentPosStatusThread = new Thread(new Runnable() {
@@ -1113,82 +1086,5 @@ public class InitActivity extends AppCompatActivity {
             }
         }
     };
-
-//    private ILfListener pos2Listener = new ILfListener() {
-//        @Override
-//        public void onCallback(Message msg) {
-//            CallbackMsg cbmsg = (CallbackMsg) msg.obj;
-//            Display dpl = cbmsg.dsp;
-//            if (cbmsg.op_type != null && dpl != null) {
-//                LfLog.d(TAG, "POS1---->回调:"
-//                        + ", cbmsg.op_type:" + cbmsg.op_type
-//                        + ", dpl.getType:" + dpl.getType()
-//                        + ", dpl.getMsg:" + dpl.getMsg());
-//            }
-//            switch (cbmsg.op_type) {
-//                case OP_POS_DISPLAY://POS提示信息
-//                    if (cbmsg.reply == 0) {//成功
-//                        if (dpl.getType().endsWith(DisplayType._6.getType())) {
-//                        } else if (dpl.getType().endsWith(DisplayType._4.getType())) {//通讯信息提示
-//                            LfLog.d(TAG, "通讯信息提示" + ", dpl.getType::" + dpl.getType() + ", dpl.getMsg:" + dpl.getMsg());
-//                        } else if (dpl.getType().endsWith(DisplayType._2.getType())) {//读卡提示信息
-//                            LfLog.d(TAG, "请刷卡或刷手机" + ", dpl.getType::" + dpl.getType() + ", dpl.getMsg:" + dpl.getMsg());
-//                            PosConfig.getInstance().setMightPos2Paying(true);
-//                        } else if (dpl.getType().endsWith(DisplayType._h.getType())) {//读卡提示信息
-//                            LfLog.d(TAG, "设置POS2读到卡，POS2正在支付状态");
-//                            PosConfig.getInstance().setMightPos2ReadCard(true);
-//                            PosConfig.getInstance().setMightPos2Paying(true);
-//                        } else if (dpl.getType().equals("-3")) {
-//                            LfLog.d(TAG, "POS2串口收发超时，设置POS2不在交易状态");
-//                            PosConfig.getInstance().setMightPos2Paying(false);
-//                        } else if (dpl.getType().equals("-4")) {
-//                            LfLog.d(TAG, "POS2串口IO错误，设置POS2不在交易状态");
-//                            PosConfig.getInstance().setMightPos2Paying(false);
-//                        }
-//                        try {
-//                            if (dpl.getType().equals("w") && dpl.getMsg().equals("停车费用")) {
-//                                byte[] content = dpl.getMsg().getBytes("gb2312");
-//                                int len = content.length;
-//                                lfLattice.showThirdContent(content, len);
-//                                showContent[0] = dpl.getMsg();
-//                                updateContentTV();
-//                                LfLog.d(TAG, "POS2提示信息wwwwwwwww" + ", dpl.getType:" + dpl.getType() + ", dpl.getMsg:" + dpl.getMsg());
-//                            } else if (dpl.getType().equals("w") && dpl.getMsg().equals("欢迎使用银联云闪付")) {
-//                                SleepUtils._sleep(1000);
-//                                byte[] content = dpl.getMsg().getBytes("gb2312");
-//                                int len = content.length;
-//                                lfLattice.showThirdContent(content, len);
-//                                showContent[0] = dpl.getMsg();
-//                                updateContentTV();
-//                                LfLog.d(TAG, "POS2提示信息wwwwwwwww" + ", dpl.getType:" + dpl.getType() + ", dpl.getMsg:" + dpl.getMsg());
-//                            } else if (dpl.getType().equals("w")) {
-//                                SleepUtils._sleep(1000);
-//                                byte[] content = dpl.getMsg().getBytes("gb2312");
-//                                int len = content.length;
-//                                lfLattice.showThirdContent(content, len);
-//                                showContent[0] = dpl.getMsg();
-//                                updateContentTV();
-//                                LfLog.d(TAG, "POS1提示信息wwwwwwwww" + ", dpl.getType:" + dpl.getType() + ", dpl.getMsg:" + dpl.getMsg());
-//                            }
-//                            if (dpl.getType().equals("x")) {
-//                                LfLog.d(TAG, "POS2提示信息xxxxxxxxx" + ", dpl.getType:" + dpl.getType() + ", dpl.getMsg:" + dpl.getMsg());
-//                                byte[] content = dpl.getMsg().getBytes("gb2312");
-//                                int len = content.length;
-//                                lfLattice.showFourthContent(content, len);
-//                                showContent[0] = dpl.getMsg();
-//                                updateContentTV();
-//                            }
-//                        } catch (UnsupportedEncodingException e) {
-//                            e.printStackTrace();
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//    };
 
 }
